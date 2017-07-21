@@ -1,0 +1,40 @@
+C:\Users\G535139\source\repos\github\msbot\MisterBot\bin\Bot Application.dll.config
+C:\Users\G535139\source\repos\github\msbot\MisterBot\bin\Bot Application.dll
+C:\Users\G535139\source\repos\github\msbot\MisterBot\bin\Bot Application.pdb
+C:\Users\G535139\source\repos\github\msbot\MisterBot\bin\Autofac.dll
+C:\Users\G535139\source\repos\github\msbot\MisterBot\bin\Chronic.dll
+C:\Users\G535139\source\repos\github\msbot\MisterBot\bin\Microsoft.Bot.Builder.Autofac.dll
+C:\Users\G535139\source\repos\github\msbot\MisterBot\bin\Microsoft.Bot.Builder.dll
+C:\Users\G535139\source\repos\github\msbot\MisterBot\bin\Microsoft.Bot.Connector.dll
+C:\Users\G535139\source\repos\github\msbot\MisterBot\bin\Microsoft.IdentityModel.Protocol.Extensions.dll
+C:\Users\G535139\source\repos\github\msbot\MisterBot\bin\Microsoft.Rest.ClientRuntime.dll
+C:\Users\G535139\source\repos\github\msbot\MisterBot\bin\Microsoft.WindowsAzure.Configuration.dll
+C:\Users\G535139\source\repos\github\msbot\MisterBot\bin\Newtonsoft.Json.dll
+C:\Users\G535139\source\repos\github\msbot\MisterBot\bin\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\G535139\source\repos\github\msbot\MisterBot\bin\System.Net.Http.Formatting.dll
+C:\Users\G535139\source\repos\github\msbot\MisterBot\bin\System.Web.Http.dll
+C:\Users\G535139\source\repos\github\msbot\MisterBot\bin\System.Web.Http.WebHost.dll
+C:\Users\G535139\source\repos\github\msbot\MisterBot\bin\Autofac.xml
+C:\Users\G535139\source\repos\github\msbot\MisterBot\bin\Microsoft.Bot.Builder.xml
+C:\Users\G535139\source\repos\github\msbot\MisterBot\bin\Microsoft.Bot.Builder.Autofac.xml
+C:\Users\G535139\source\repos\github\msbot\MisterBot\bin\Microsoft.Bot.Connector.xml
+C:\Users\G535139\source\repos\github\msbot\MisterBot\bin\Microsoft.IdentityModel.Protocol.Extensions.xml
+C:\Users\G535139\source\repos\github\msbot\MisterBot\bin\Microsoft.WindowsAzure.Configuration.xml
+C:\Users\G535139\source\repos\github\msbot\MisterBot\bin\Newtonsoft.Json.xml
+C:\Users\G535139\source\repos\github\msbot\MisterBot\bin\System.IdentityModel.Tokens.Jwt.xml
+C:\Users\G535139\source\repos\github\msbot\MisterBot\bin\System.Net.Http.Formatting.xml
+C:\Users\G535139\source\repos\github\msbot\MisterBot\bin\System.Web.Http.xml
+C:\Users\G535139\source\repos\github\msbot\MisterBot\bin\System.Web.Http.WebHost.xml
+C:\Users\G535139\source\repos\github\msbot\MisterBot\bin\ar\Microsoft.Bot.Builder.resources.dll
+C:\Users\G535139\source\repos\github\msbot\MisterBot\bin\cs\Microsoft.Bot.Builder.resources.dll
+C:\Users\G535139\source\repos\github\msbot\MisterBot\bin\de-dE\Microsoft.Bot.Builder.resources.dll
+C:\Users\G535139\source\repos\github\msbot\MisterBot\bin\en\Microsoft.Bot.Builder.resources.dll
+C:\Users\G535139\source\repos\github\msbot\MisterBot\bin\es\Microsoft.Bot.Builder.resources.dll
+C:\Users\G535139\source\repos\github\msbot\MisterBot\bin\fa\Microsoft.Bot.Builder.resources.dll
+C:\Users\G535139\source\repos\github\msbot\MisterBot\bin\fr\Microsoft.Bot.Builder.resources.dll
+C:\Users\G535139\source\repos\github\msbot\MisterBot\bin\ja\Microsoft.Bot.Builder.resources.dll
+C:\Users\G535139\source\repos\github\msbot\MisterBot\bin\ru\Microsoft.Bot.Builder.resources.dll
+C:\Users\G535139\source\repos\github\msbot\MisterBot\bin\zh-hans\Microsoft.Bot.Builder.resources.dll
+C:\Users\G535139\source\repos\github\msbot\MisterBot\obj\Debug\MisterBot.csprojResolveAssemblyReference.cache
+C:\Users\G535139\source\repos\github\msbot\MisterBot\obj\Debug\Bot Application.dll
+C:\Users\G535139\source\repos\github\msbot\MisterBot\obj\Debug\Bot Application.pdb

@@ -35,6 +35,6 @@ C:\Users\G535139\source\repos\github\msbot\MisterBot\bin\fr\Microsoft.Bot.Builde
 C:\Users\G535139\source\repos\github\msbot\MisterBot\bin\ja\Microsoft.Bot.Builder.resources.dll
 C:\Users\G535139\source\repos\github\msbot\MisterBot\bin\ru\Microsoft.Bot.Builder.resources.dll
 C:\Users\G535139\source\repos\github\msbot\MisterBot\bin\zh-hans\Microsoft.Bot.Builder.resources.dll
-C:\Users\G535139\source\repos\github\msbot\MisterBot\obj\Debug\MisterBot.csprojResolveAssemblyReference.cache
 C:\Users\G535139\source\repos\github\msbot\MisterBot\obj\Debug\Bot Application.dll
 C:\Users\G535139\source\repos\github\msbot\MisterBot\obj\Debug\Bot Application.pdb
+C:\Users\G535139\source\repos\github\msbot\MisterBot\obj\Debug\MisterBot.csprojResolveAssemblyReference.cache

@@ -8,19 +8,18 @@ namespace MisterBot.Dialogs
     [Serializable]
     public class ConfusedDialog : IDialog<object>
     {
-        public Task StartAsync(IDialogContext context)
-        {            
+        public async Task StartAsync(IDialogContext context)
+        {
+            var name = "User";
+            context.UserData.TryGetValue<string>("Name", out name);
+
+            await context.PostAsync($"Sorry {name}, I am confused by that...");
             context.Wait(MessageReceivedAsync);
-            return Task.CompletedTask;
         }
 
         private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
             var activity = await result;
-            var name = "User";
-            context.UserData.TryGetValue<string>("Name", out name);
-
-            await context.PostAsync($"Sorry {name}, I am confused by that...");
             context.Done(activity);
         }
 

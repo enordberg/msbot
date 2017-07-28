@@ -36,6 +36,11 @@ namespace MisterBot.Dialogs
                 await context.PostAsync("created for Code Camp by Eric Nordberg");
                 context.Wait(MessageReceivedAsync);
             }
+            else if (text.Contains("bots"))
+            {
+                await context.PostAsync("I'll tell you about other GMI Bots.");
+                await context.Forward(new BotsDialog(), this.AfterBots, message, CancellationToken.None);
+            }
             else if (text.Equals("bye"))
             {
                 string username = null;
@@ -45,7 +50,7 @@ namespace MisterBot.Dialogs
             }
             else if (text.Equals("help"))
             {
-                await context.PostAsync("Try the following commands... hi, feedback, credits, bye.");
+                await context.PostAsync("Try the following commands... hi, feedback, list bots, credits, bye.");
                 context.Wait(MessageReceivedAsync);
             }
             else
@@ -61,6 +66,21 @@ namespace MisterBot.Dialogs
             var username = await result;
 
             await context.PostAsync($"It is nice to meet you.");
+            context.Wait(this.MessageReceivedAsync);
+        }
+
+        private async Task AfterBots(IDialogContext context, IAwaitable<bool> result)
+        {
+            var botDialoagWasGood = await result;
+
+            if (botDialoagWasGood)
+            {
+                await context.PostAsync($"Thanks for letting me tell you about bots.");
+            }
+            else
+            {
+                await context.PostAsync($"Sorry I wasn't able to answer your bot questions better.");
+            }
             context.Wait(this.MessageReceivedAsync);
         }
 

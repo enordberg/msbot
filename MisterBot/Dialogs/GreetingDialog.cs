@@ -8,58 +8,62 @@ namespace MisterBot.Dialogs
     [Serializable]
     public class GreetingDialog : IDialog<object>
     {
+        private bool _isCollectingName = true;
+
         public async Task StartAsync(IDialogContext context)
         {
-            var welcomeDelivered = false;
-            context.UserData.TryGetValue<bool>("Welcome", out welcomeDelivered);
-
-            if (!welcomeDelivered)
-            {
-                await context.PostAsync("Welcome to botville!");
-                context.UserData.SetValue<bool>("Welcome", true);
-                await Respond(context);
-            }            
-            
+            await context.PostAsync("Welcome.  I'm Mister Bot!");
+            await Respond(context, true);
             context.Wait(MessageReceivedAsync);
         }
 
-        private static async Task Respond(IDialogContext context)
+        private static async Task Respond(IDialogContext context, bool isFirstTimeThrough)
         {
             var username = string.Empty;
             context.UserData.TryGetValue<string>("Name", out username);
 
             if (string.IsNullOrEmpty(username))
             {
-                await context.PostAsync("What is your name cowboy?");
+                await context.PostAsync("What is your name?");
                 context.UserData.SetValue<bool>("GetName", true);
             }
             else
-            {
-                await context.PostAsync($"Hello {username}.  I am a bot.  What can I do for you?");
+            {                
+                await context.PostAsync($"Hello {username}!");
+                if (isFirstTimeThrough)
+                {
+                    await context.PostAsync($"Is it nice to be back?");
+                }                
             }
-
         }
 
         private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
             var activity = await result;
-            var username = string.Empty;
             var getName = false;
-
             context.UserData.TryGetValue<bool>("GetName", out getName);
 
             if (getName)
             {
-                username = activity.Text;
+                var username = activity.Text;
                 context.UserData.SetValue<string>("Name", username);
                 context.UserData.SetValue<bool>("GetName", false);
-                await Respond(context);
+                await Respond(context, false);
             }
-            
+            else
+            {
+                if (activity.Text.Equals("yes", StringComparison.OrdinalIgnoreCase) ||
+                    activity.Text.Equals("y", StringComparison.OrdinalIgnoreCase))
+                {
+                    await context.PostAsync($"Great.  It's good to have you back.");
+                }
+                else
+                {
+                    await context.PostAsync($"Huh...");
+                }
+            }
+
             context.Done(activity);
         }
-
-
-
     }
 }

@@ -18,35 +18,24 @@ namespace MisterBot.Dialogs
                     return Chain.ContinueWith(new GreetingDialog(), AfterGreetingContinuation);
                 }),
                 new RegexCase<IDialog<string>>(new Regex("^bye", RegexOptions.IgnoreCase), (context, text) =>
-                {
-                    return Chain.ContinueWith(new GoodbyeDialog(), AfterGoodbyeContinuation);
+                {                    
+                    context.UserData.RemoveValue("Name");
+                    return Chain.Return("Thanks for the chat...  Good bye!");
                 }),
                 new DefaultCase<string, IDialog<string>>((context, text) =>
                 {
-                    return Chain.ContinueWith(new ConfusedDialog(), ConfusedContinuation);
+                    return Chain.Return("I'm sorry.  I don't know what you mean.");
                 }))
             .Unwrap()
             .PostToUser();
 
 
-        private async static Task<IDialog<string>> AfterGreetingContinuation(IBotContext context, IAwaitable<object> item)
+        private static async Task<IDialog<string>> AfterGreetingContinuation(IBotContext context, IAwaitable<object> item)
         {
             var token = await item;
             var name = "User";
             context.UserData.TryGetValue<string>("Name", out name);
-            return Chain.Return(string.Empty);
-        }
-
-        private static async Task<IDialog<string>> AfterGoodbyeContinuation(IBotContext context, IAwaitable<object> item)
-        {
-            var token = await item;
-            return Chain.Return("Please leave now.");
-        }
-
-        private static async Task<IDialog<string>> ConfusedContinuation(IBotContext context, IAwaitable<object> item)
-        {
-            var token = await item;
-            return Chain.Return("Tell me more.");
+            return Chain.Return($"What can I do for you {name}?");
         }
     }
 }

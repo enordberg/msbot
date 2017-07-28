@@ -1,41 +1,90 @@
 ﻿using System;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Bot.Builder.Dialogs;
+using Microsoft.Bot.Builder.FormFlow;
 using Microsoft.Bot.Connector;
+using MisterBot.Models;
 
 namespace MisterBot.Dialogs
 {
     [Serializable]
-    public class RootDialog
+    public class RootDialog : IDialog<object>
     {
-
-        public static readonly IDialog<string> Dialog = Chain.PostToChain()
-            .Select(msg => msg.Text)
-            .Switch(
-                new RegexCase<IDialog<string>>(new Regex("^hi", RegexOptions.IgnoreCase), (context, text) =>
-                {
-                    return Chain.ContinueWith(new GreetingDialog(), AfterGreetingContinuation);
-                }),
-                new RegexCase<IDialog<string>>(new Regex("^bye", RegexOptions.IgnoreCase), (context, text) =>
-                {                    
-                    context.UserData.RemoveValue("Name");
-                    return Chain.Return("Thanks for the chat...  Good bye!");
-                }),
-                new DefaultCase<string, IDialog<string>>((context, text) =>
-                {
-                    return Chain.Return("I'm sorry.  I don't know what you mean.");
-                }))
-            .Unwrap()
-            .PostToUser();
-
-
-        private static async Task<IDialog<string>> AfterGreetingContinuation(IBotContext context, IAwaitable<object> item)
+        public async Task StartAsync(IDialogContext context)
         {
-            var token = await item;
-            var name = "User";
-            context.UserData.TryGetValue<string>("Name", out name);
-            return Chain.Return($"What can I do for you {name}?");
+            context.Wait(this.MessageReceivedAsync);
+        }
+
+        public virtual async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
+        {
+            var message = await result;
+
+            var text = message.Text.ToLower();
+            if (text.Equals("hi") || text.Equals("hello"))
+            {
+                await context.Forward(new GreetingDialog(), this.AfterGreeting, message, CancellationToken.None);
+            }
+            else if (text.Equals("feedback") || text.Equals("rate"))
+            {
+                await context.PostAsync("Starting feedback form.  Type help - if needed.");
+                context.Call(Feedback.BuildFormDialog(FormOptions.PromptInStart), FeedbackComplete);
+            }
+            else if (text.Equals("credits"))
+            {
+                await context.PostAsync("created for Code Camp by Eric Nordberg");
+                context.Wait(MessageReceivedAsync);
+            }
+            else if (text.Equals("bye"))
+            {
+                string username = null;
+                context.UserData.TryGetValue("Name", out username);
+                await context.PostAsync($"see you later {username ?? "alligator"}");
+                context.Wait(MessageReceivedAsync);
+            }
+            else if (text.Equals("help"))
+            {
+                await context.PostAsync("Try the following commands... hi, feedback, credits, bye.");
+                context.Wait(MessageReceivedAsync);
+            }
+            else
+            {
+                await context.PostAsync("I'm sorry.  I don't know what you mean.");
+                context.Wait(MessageReceivedAsync);
+            }
+        }
+
+        
+        private async Task AfterGreeting(IDialogContext context, IAwaitable<string> result)
+        {
+            var username = await result;
+
+            await context.PostAsync($"It is nice to meet you.");
+            context.Wait(this.MessageReceivedAsync);
+        }
+
+        private async Task FeedbackComplete(IDialogContext context, IAwaitable<Feedback> result)
+        {
+            try
+            {
+                var form = await result;
+                if (form != null)
+                {
+                    await context.PostAsync("Thanks for the feedback!");
+                    await context.PostAsync($"I think you are {form.Rating} too!");
+                }
+                else
+                {
+                    await context.PostAsync("We did not get that feedback.");
+                }
+            }
+            catch (OperationCanceledException)
+            {
+                await context.PostAsync("Feedback cancelled.");
+            }
+
+            context.Wait(MessageReceivedAsync);
         }
     }
 }

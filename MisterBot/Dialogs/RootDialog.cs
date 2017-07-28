@@ -41,6 +41,11 @@ namespace MisterBot.Dialogs
                 await context.PostAsync("I'll tell you about other GMI Bots.");
                 await context.Forward(new BotsDialog(), this.AfterBots, message, CancellationToken.None);
             }
+            else if (text.Contains("thank"))
+            {
+                await context.PostAsync("You are welcome.");
+                context.Wait(MessageReceivedAsync);
+            }
             else if (text.Equals("bye"))
             {
                 string username = null;
